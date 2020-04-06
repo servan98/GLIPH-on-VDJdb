@@ -1,20 +1,50 @@
 # GLIPH-on-VDJb
-06-04-2020
-This repository contains the code and database used to create the gliph results for the research project of S.J. van den Brink.
-The database has been downloaded from https://vdjdb.cdr3.net/search on 23-04-2020 using the following filters:
-CDR3 :
-  Species :   Human
-  Genechain : TRA
-              TRB
-              paired only
-              append pairs
-MHC :
-  Class : MHCI
-          MHCII
-Meta :
-  Assay type :  Multimer sorting
-                Culture-based
-                Other
-  Sequencing :  Sanger
-                High-throughput
-                Single-cell
+###### 06-05-2020
+Introduction
+----
+This repository contains the code and database used to create the gliph results for the research project of S.J. van den Brink .
+
+Database
+----
+The database has been downloaded from: https://vdjdb.cdr3.net/search on 23-03-2020 using the following filters:
+- CDR3 :
+  - Species :   
+    - Human
+  - Genechain : 
+    - TRA
+    - TRB
+    - paired only
+    - append pairs
+- MHC :
+  - Class : 
+	  - MHCI
+    - MHCII
+- Meta :
+  - Assay type :  
+	  - Multimer sorting
+    - Culture-based
+    - Other
+  - Sequencing :  
+	  - Sanger
+    - High-throughput
+    - Single-cell
+
+Gliph
+----
+The gliph (Grouping of Lymphocyte Interactions by Paratope Hotspots) algortim has been obtained from: https://github.com/immunoengineer/gliph and the authors article on gliph and its usage can be found here:  doi:10.1038/nature22976
+
+Code
+----
+The code for the datamanipulation can be found in .... \
+The code for running gliph can be found on https://github.com/immunoengineer/gliph \
+The code for visualisation can be found in .... 
+
+Packages used
+----
+In R (Rstudio Version 1.1.456) : 
+- tidyverse
+
+In Python (3.7.6) :
+- pyvis
+- pandas
+
