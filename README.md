@@ -35,9 +35,9 @@ The gliph (Grouping of Lymphocyte Interactions by Paratope Hotspots) algortim ha
 
 Code
 ----
-The code for the datamanipulation can be found in Data-manipulation.R \
+The code for the datamanipulation can be found in https://github.com/servan98/GLIPH-on-VDJb/Data-manipulation.R \
 The code for running gliph can be found on https://github.com/immunoengineer/gliph \
-The code for visualisation can be found in and Visualisation_PatientID.py 
+The code for visualisation can be found in https://github.com/servan98/GLIPH-on-VDJb/Visualisation_HLAtype.py and https://github.com/servan98/GLIPH-on-VDJb/Visualisation_PatientID.py 
 
 Packages used
 ----
