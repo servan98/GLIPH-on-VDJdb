@@ -37,7 +37,7 @@ Code
 ----
 The code for the datamanipulation can be found in https://github.com/servan98/GLIPH-on-VDJb/Data-manipulation.R \
 The code for running gliph can be found on https://github.com/immunoengineer/gliph \
-The code for visualisation can be found in https://github.com/servan98/GLIPH-on-VDJb/Visualisation_HLAtype.py and https://github.com/servan98/GLIPH-on-VDJb/Visualisation_PatientID.py 
+The code for visualisation can be found in https://github.com/servan98/GLIPH-on-VDJb/Visualisation_HLAtype.py and https://raw.githubusercontent.com/servan98/GLIPH-on-VDJb/master/Visualisation_PatientID.py
 
 Packages used
 ----
