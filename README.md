@@ -43,6 +43,7 @@ Packages used
 ----
 In R (Rstudio Version 1.1.456) : 
 - tidyverse
+- stringr
 
 In Python (3.7.6) :
 - pyvis
