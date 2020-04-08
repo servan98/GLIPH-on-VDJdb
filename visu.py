@@ -4,10 +4,9 @@ Created on Mon Mar 30 15:37:09 2020
 
 @author: S.J. van den Brink
 
-
 In order to run the visualisation for your own cluster, first run the R file and the gliph clustering.
-Then change the files to the correct files in line 23,29,35,93 and 137.
-To move to a different cluster, only line 35 and 137 need to be changed
+Then change the files to the correct files in line 21,27,32,85 and 125.
+To move to a different cluster, only line 32 and 125 need to be changed
 """
 #import packages
 from pyvis.network import Network
@@ -15,7 +14,6 @@ import pandas as pd
 
 #create empty network
 klr_net = Network(height="75%", width="100%", bgcolor="#ffffff", font_color="#004a47")
-
 
 # set the physics layout of the network
 klr_net.barnes_hut()
@@ -26,19 +24,15 @@ targets = klr[1]
 edge_data = zip(sources, targets)
 
 #open HLA data made in R
-with open("D:/gliph-1.0/gliph/bin/HLA_DATA.txt") as b:
+with open("D:/gliph-1.0/gliph/bin/HLA_DATAres3.txt") as b:
   HLAs = b.readlines()
 b.close()
 
-
 #open cluster data made in R and make a list out of it
-with open("D:/gliph-1.0/gliph/bin/cluster2534.txt") as f:
+with open("D:/gliph-1.0/gliph/bin/cluster18.txt") as f:
   cl18 = f.readline()
 f.close()
 cl18 = cl18.split()
-
-
-
 
 for e in edge_data:     #for every source and target after gliph
     src = e[0]  #assign source to src
@@ -68,8 +62,6 @@ for point in klr_net.nodes: #for every node
                 occ[name] = occ[name]+1 #add 1 to the value of this key
             else: #otherwise, create key with value 1
                 occ[name] = 1
-
-
 
 #list of differentiatable colours
 #           rood        green       blauw       geel        paars       lichtblauw      roze        oranje     zwart    lichtpaars   donkergroen
@@ -127,14 +119,10 @@ legenda+="</div> \n"
 #open the previously saved TCR.html, remove the "</body> </html>" add the legend and add "</body> </html>" again. then write to the appropriate file 
 with open('D:/gliph-1.0/gliph/bin/TCR.html', 'r') as f:
     html = f.read()
-print(html[-15:])
 htmls = html[-0:-15]
-print(htmls)
 htmll = htmls+legenda
-print(htmll)
 htmlf = htmll + html[-15:]
-print(htmlf)
-H= open("TCRL2534.html","w+")
+H= open("TCRL18res3.html","w+")
 H.write(htmlf)
 H.close()
 #list of clusters i have used in visualisation: 18,2,139,111,33,113,591,457,1370,2534
