@@ -1,11 +1,15 @@
 library(tidyverse)
-
+library(stringr)
 
 #import dataset
-dab <- read_delim("VDJBdatabase.tsv", "\t", escape_double = FALSE, trim_ws = TRUE)
+dab <- read_delim("ABsam.tsv", "\t", escape_double = FALSE, trim_ws = TRUE)
 
 
-#combining TRA and TRB in a single dataframe with controles 
+#combining TRA and TRB in a single dataframe with controles
+done <- c()
+PCi <- NULL
+nie <- tibble(complex.id = NA,CDR3b = NA, TRBV = NA, TRBJ = NA, CDR3a = NA, TRAV = NA, TRAJ = NA, PatientCounts = NA)
+
 for (i in dab$complex.id){ #for loop over all ids
   if (i %in% done != TRUE){ #if id not in list with previously done ids, continue
     done <- c(done, i) #add id to list with previously done ids
@@ -51,6 +55,7 @@ for (i in dab$complex.id){ #for loop over all ids
     PCi <- NULL
   }
 }
+
 #write data to DATAZ.txt without column complex.id
 DATA <- nie
 DATA$complex.id <- NULL
@@ -58,6 +63,8 @@ write.table(DATA, "D:/gliph-1.0/gliph/bin/DATAz.txt", sep="\t", row.names = FALS
 
 
 #make a new dataframe with a new column containing patient ids
+niecol <- c()
+
 for(e in dab$Meta){ #loop over meta
   verw <- str_remove_all(e,"\"")#remove "\"
   gesplit <- strsplit(verw,",")#split in categories
@@ -74,6 +81,8 @@ dabsubid$subid <- niecol
 
 
 #make a table with HLA information for GLIPHs HLA association test
+klaar <-c()
+
 for(e in dabsubid$subid){ #for every subid
   if (e %in% klaar != TRUE){#check if subid is in list with already done subids
     klaar <- c(klaar, e)#add subid to list with already done subids
@@ -96,25 +105,33 @@ for(e in dabsubid$subid){ #for every subid
 
 
 #Make an HLA_data txt file for the visualisation
+qlaar <- c()
 for(q in dabsubid$`MHC A`){ #for loop over every MHC A
   if (q %in% qlaar != TRUE){#check if MHC is in list with already done MHCs 
     qlaar <- c(qlaar, q)#add MHC to list with already done MHCs
     qpla <- (which(dabsubid$`MHC A` == q)) #get positions of every occurunce of this MHC
-    nieqrow <- c(q) #make a new list with the MHC as first entry
+    sp <- strsplit(q,":")
+    if(length(sp[[1]])>1){
+      typ <- str_c(sp[[1]][[1]],':',sp[[1]][[2]])
+    }
+    else{
+      typ <- sp[[1]][[1]]
+    }
+    nieqrow <- c(typ) #make a new list with the MHC as first entry
     for(qp in qpla){ #loop over all positions
       if(dabsubid[qp,]$CDR3 %in% nieqrow != TRUE){ #if CDR3 on this location not yet in list 
         nieqrow <- c(nieqrow, dabsubid[qp,]$CDR3) #add CDR3 to list
       }
     }
     #write nieqrow and a linebreak to file containing the HLA tabel and empty qnierow
-    write_lines(nieqrow, "D:/gliph-1.0/gliph/bin/HLA_DATA.txt" ,append = TRUE, sep="\t")
-    write_lines("\n", "D:/gliph-1.0/gliph/bin/HLA_DATA.txt" ,append = TRUE, sep = "")
+    write_lines(nieqrow, "D:/gliph-1.0/gliph/bin/HLA_DATAres3.txt" ,append = TRUE, sep="\t")
+    write_lines("\n", "D:/gliph-1.0/gliph/bin/HLA_DATAres3.txt" ,append = TRUE, sep = "")
     nieqrow <- NULL
   }
 }
 
 
-#getting the individual cluster can be achieved by changing the variable nr, in the line below and the name of the file in line 126
+#getting the individual cluster can be achieved by changing the variable nr, in the line below and the name of the file in line 143
 nr <- 2534 #change this number to the cluster you want the information of
 afdr <- NULL #empty afdr
 clus <- DATAz.convergence.groups #import the clusters
@@ -125,4 +142,3 @@ for (s in sclus){
 afdr <- c(nr,str_remove(clus[nr,2],"CRG-"),afdr) #add the number of the cluster, the source sequences and all target sequences of the cluster
 write_lines(afdr, "D:/gliph-1.0/gliph/bin/cluster2534.txt" ,append = TRUE, sep="\t") #write this line to a text file of the cluster to be used in visualisation
 #list of clusters i have used in visualisation: 18,2,139,111,33,113,591,457,1370,2534
-
