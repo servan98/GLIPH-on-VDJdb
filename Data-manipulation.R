@@ -123,7 +123,7 @@ for(q in dabsubid$`MHC A`){ #for loop over every MHC A
         nieqrow <- c(nieqrow, dabsubid[qp,]$CDR3) #add CDR3 to list
       }
     }
-    #write nieqrow and a linebreak to file containing the HLA tabel and empty qnierow
+    #write nieqrow and a linebreak to file containing the HLA tabel and empty nieqrow
     write_lines(nieqrow, "D:/gliph-1.0/gliph/bin/HLA_DATAres3.txt" ,append = TRUE, sep="\t")
     write_lines("\n", "D:/gliph-1.0/gliph/bin/HLA_DATAres3.txt" ,append = TRUE, sep = "")
     nieqrow <- NULL
@@ -131,7 +131,84 @@ for(q in dabsubid$`MHC A`){ #for loop over every MHC A
 }
 
 
-#getting the individual cluster can be achieved by changing the variable nr, in the line below and the name of the file in line 143
+#Make an Patientid_data txt file for the visualisation
+slaar <- c()
+for(s in dabsubid$subid){ #for loop over every patient id
+  if (s %in% slaar != TRUE){#check if pID is in list with already done pIDs 
+    slaar <- c(slaar, s)#add pID to list with already done pIDs
+    spla <- (which(dabsubid$subid == s)) #get positions of every occurunce of this pID
+    niesrow <- c(s) #make a new list with the pID as first entry
+    for(sp in spla){ #loop over all positions
+      if(dabsubid[sp,]$CDR3 %in% niesrow != TRUE){ #if CDR3 on this location not yet in list 
+        niesrow <- c(niesrow, dabsubid[sp,]$CDR3) #add CDR3 to list
+      }
+    }
+    #write niesrow and a linebreak to file containing the Patienid tabel and empty niesrow
+    write_lines(niesrow, "D:/gliph-1.0/gliph/bin/Patientid_DATA.txt" ,append = TRUE, sep="\t")
+    write_lines("\n", "D:/gliph-1.0/gliph/bin/Patientid_DATA.txt" ,append = TRUE, sep = "")
+    niesrow <- NULL
+  }
+}
+
+#Make an VgeneUsage_data txt file for the visualisation
+vlaar <- c()
+for(v in dabsubid$V){ #for loop over every V gene
+  if (v %in% vlaar != TRUE){#check if V gene is in list with already done V genes 
+    vlaar <- c(vlaar, v)#add V gene to list with already done V genes
+    vpla <- (which(dabsubid$V == v)) #get positions of every occurunce of this V gene
+    nievrow <- c(v) #make a new list with the V gene as first entry
+    for(vp in vpla){ #loop over all positions
+      if(dabsubid[vp,]$CDR3 %in% nievrow != TRUE){ #if CDR3 on this location not yet in list 
+        nievrow <- c(nievrow, dabsubid[vp,]$CDR3) #add CDR3 to list
+      }
+    }
+    #write nievrow and a linebreak to file containing the Vgeneusage tabel and empty nievrow
+    write_lines(nievrow, "D:/gliph-1.0/gliph/bin/VgeneUsage_DATA.txt" ,append = TRUE, sep="\t")
+    write_lines("\n", "D:/gliph-1.0/gliph/bin/VgeneUsage_DATA.txt" ,append = TRUE, sep = "")
+    nievrow <- NULL
+  }
+}
+
+#Make an JgeneUsage_data txt file for the visualisation
+jlaar <- c()
+for(j in dabsubid$J){ #for loop over every J gene
+  if (j %in% jlaar != TRUE){#check if J gene is in list with already done J genes 
+    jlaar <- c(jlaar, j)#add J gene to list with already done J genes
+    jpla <- (which(dabsubid$J == j)) #get positions of every occurunce of this V gene
+    niejrow <- c(j) #make a new list with the J gene as first entry
+    for(jp in jpla){ #loop over all positions
+      if(dabsubid[jp,]$CDR3 %in% niejrow != TRUE){ #if CDR3 on this location not yet in list 
+        niejrow <- c(niejrow, dabsubid[jp,]$CDR3) #add CDR3 to list
+      }
+    }
+    #write niejrow and a linebreak to file containing the Jgeneusage tabel and empty niejrow
+    write_lines(niejrow, "D:/gliph-1.0/gliph/bin/JgeneUsage_DATA.txt" ,append = TRUE, sep="\t")
+    write_lines("\n", "D:/gliph-1.0/gliph/bin/JgeneUsage_DATA.txt" ,append = TRUE, sep = "")
+    niejrow <- NULL
+  }
+}
+
+#Make an Epitope_data txt file for the visualisation
+elaar <- c()
+for(e in dabsubid$Epitope){ #for loop over every Epitope
+  if (e %in% elaar != TRUE){#check if Epitope is in list with already done Epitopes 
+    elaar <- c(elaar, e)#add Epitope to list with already done Epitopes
+    epla <- (which(dabsubid$Epitope == e)) #get positions of every occurunce of this Epitope
+    nieerow <- c(e) #make a new list with the Epitope as first entry
+    for(ep in epla){ #loop over all positions
+      if(dabsubid[ep,]$CDR3 %in% nieerow != TRUE){ #if CDR3 on this location not yet in list 
+        nieerow <- c(nieerow, dabsubid[ep,]$CDR3) #add CDR3 to list
+      }
+    }
+    #write nieerow and a linebreak to file containing the Eptipe tabel and empty niejrow
+    write_lines(nieerow, "D:/gliph-1.0/gliph/bin/Epitope_DATA.txt" ,append = TRUE, sep="\t")
+    write_lines("\n", "D:/gliph-1.0/gliph/bin/Epitope_DATA.txt" ,append = TRUE, sep = "")
+    nieerow <- NULL
+  }
+}
+
+
+#getting the individual cluster can be achieved by changing the variable nr, in the line below and the name of the file in line 220
 nr <- 2534 #change this number to the cluster you want the information of
 afdr <- NULL #empty afdr
 clus <- DATAz.convergence.groups #import the clusters
