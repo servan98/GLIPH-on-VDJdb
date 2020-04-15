@@ -208,7 +208,7 @@ for(e in dabsubid$Epitope){ #for loop over every Epitope
 }
 
 
-#getting the individual cluster can be achieved by changing the variable nr, in the line below and the name of the file in line 220
+#getting the individual cluster can be achieved by changing the variable nr in the line below, the " ".convergence.groups and the name of the file in line 220
 nr <- 2534 #change this number to the cluster you want the information of
 afdr <- NULL #empty afdr
 clus <- DATAz.convergence.groups #import the clusters
