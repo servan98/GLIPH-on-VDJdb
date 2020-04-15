@@ -5,8 +5,8 @@ Created on Mon Mar 30 15:37:09 2020
 @author: S.J. van den Brink
 
 In order to run the visualisation for your own cluster, first run the R file and the gliph clustering.
-Then change the files to the correct files in line 21,27,32,85 and 125.
-To move to a different cluster, only line 32 and 125 need to be changed
+Then change the files to the correct files in line 22,28,33,92,118 and 132.
+To move to a different cluster, only line 33 and 132 need to be changed
 """
 
 #import packages
