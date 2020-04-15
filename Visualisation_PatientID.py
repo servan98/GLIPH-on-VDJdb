@@ -5,8 +5,8 @@ Created on Mon Mar 30 15:37:09 2020
 @author: S.J. van den Brink
 
 In order to run the visualisation for your own cluster, first run the R file and the gliph clustering.
-Then change the files to the correct files in line 21,27,32,85 and 125.
-To move to a different cluster, only line 32 and 125 need to be changed
+Then change the files to the correct files in line 21,27,32,91,117,126 and 131.
+To move to a different cluster, only line 32 and 131 need to be changed
 """
 #import packages
 from pyvis.network import Network
@@ -29,7 +29,7 @@ with open("D:/gliph-1.0/gliph/bin/Patientid_DATA.txt") as b:
 b.close()
 
 #open cluster data made in R and make a list out of it
-with open("D:/gliph-1.0/gliph/bin/cluster18.txt") as f:
+with open("D:/gliph-1.0/gliph/bin/cluster457.txt") as f:
   cl18 = f.readline()
 f.close()
 cl18 = cl18.split()
@@ -44,10 +44,10 @@ for e in edge_data:     #for every source and target after gliph
     src = e[0]  #assign source to src
     dst = e[1]  #assign target/destination to dst
     if src in cl18 and dst in cl18: #check if source and data are both present in convergencegroup (18)
-        for i in range(0,151):   #itterate over 0-35 for every HLA in HLAs
+        for i in range(0,x):   #itterate over 0-35 for every HLA in HLAs
             if src in IDs[i]:  #if source in one of the HLA lists..
                 klr_net.add_node(src, src, title=src)   #add source node to prob_net with color assigned to i
-        for i in range(0,151):   #itterate over 0-35 for every HLA in HLAs
+        for i in range(0,x):   #itterate over 0-35 for every HLA in HLAs
             if dst in IDs[i]:  #if target in one of the HLA lists..
                 klr_net.add_node(dst, dst, title=dst) #add target node to prob_net with color assigned to i     
         klr_net.add_edge(src, dst) #add edge between source and target
@@ -61,7 +61,7 @@ for node in klr_net.nodes:
 #Make a dictionary containing the occurence of every HLA-type
 occ = {}
 for point in klr_net.nodes: #for every node
-    for i in range(0,151): # create a loop over 35 numbers(enough to cover all HLAs in this case)
+    for i in range(0,x): # create a loop over 35 numbers(enough to cover all HLAs in this case)
         if point["id"] in IDs[i]: #if node sequence in the list of HLA[i]
             name = IDs[i].split()[0] #assign the HLA-type to name
             if name in occ.keys(): #if name is present in occ as key
@@ -77,7 +77,7 @@ Ncolors = {}
 occ = {k: v for k, v in sorted(occ.items(), key=lambda item: item[1], reverse=True)}
 z = 0
 for HLAn, amm in occ.items():
-    if amm > 20:
+    if amm > 3:
         Ncolors[HLAn] = Hcolor[z]
         z += 1
     else:
@@ -97,11 +97,11 @@ for e in edge_data:     #for every source and target after gliph
     src = e[0]  #assign source to src
     dst = e[1]  #assign target/destination to dst
     if src in cl18 and dst in cl18: #check if source and data are both present in convergencegroup (18)
-        for i in range(0,151):   #itterate over 0-35 for every HLA in HLAs
+        for i in range(0,x):   #itterate over 0-35 for every HLA in HLAs
             if src in IDs[i]:  #if source in one of the HLA lists..
                 name = IDs[i].split()[0] #get the HLA-type of this source
                 prob_net.add_node(src, src, title=src, color=Ncolors[name])   #add source node to prob_net with color assigned to the hla-type in Ncolors
-        for i in range(0,151):   #itterate over 0-35 for every HLA in HLAs
+        for i in range(0,x):   #itterate over 0-35 for every HLA in HLAs
             if dst in IDs[i]:  #if target in one of the HLA lists..
                 name = IDs[i].split()[0] #get the HLA-type of this target
                 prob_net.add_node(dst, dst, title=dst, color=Ncolors[name]) #add target node to prob_net with color assigned to the hla-type in Ncolors    
@@ -114,7 +114,7 @@ for node in prob_net.nodes:
     node["value"] = len(neighbor_map[node["id"]])
 
 #save graph as TCR.html
-prob_net.save_graph("TCR.html")
+prob_net.save_graph("D:/gliph-1.0/gliph/bin/TCR.html")
 
 #make a legend in html language
 legenda = "<div> \n<h3>Legend HLA types</h3> \n Patient ID : occurence"
@@ -128,7 +128,7 @@ with open('D:/gliph-1.0/gliph/bin/TCR.html', 'r') as f:
 htmls = html[-0:-15]
 htmll = htmls+legenda
 htmlf = htmll + html[-15:]
-H= open("TCRL18ID.html","w+")
+H= open("D:/gliph-1.0/gliph/bin/TCRL457ID.html","w+")
 H.write(htmlf)
 H.close()
 #list of clusters i have used in visualisation: 18,2,139,111,33,113,591,457,1370,2534
