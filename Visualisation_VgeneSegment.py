@@ -5,7 +5,7 @@ Created on Mon Mar 30 15:37:09 2020
 @author: S.J. van den Brink
 
 In order to run the visualisation for your own cluster, first run the R file and the gliph clustering.
-Then change the files to the correct files in line 21,27,32,85 and 125.
+Then change the files to the correct files in line 22,28,33,92,118 and 132.
 To move to a different cluster, only line 32 and 125 need to be changed
 """
 
@@ -85,7 +85,7 @@ for HLAn, amm in occ.items():
         Ncolors[HLAn] = "#bababa"
 
 #make an empty network
-prob_net = Network(height="100%", width="100%", bgcolor="#ffffff", font_color="#004a47")
+prob_net = Network(height="75%", width="100%", bgcolor="#ffffff", font_color="#004a47")
 
 # set the physics layout of the network
 prob_net.barnes_hut()
