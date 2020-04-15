@@ -85,7 +85,7 @@ for HLAn, amm in occ.items():
         Ncolors[HLAn] = "#bababa"
 
 #make an empty network
-prob_net = Network(height="100%", width="100%", bgcolor="#ffffff", font_color="#004a47")
+prob_net = Network(height="75%", width="100%", bgcolor="#ffffff", font_color="#004a47")
 
 # set the physics layout of the network
 prob_net.barnes_hut()
