@@ -41,7 +41,7 @@ The code for visualisation can be found in https://github.com/servan98/GLIPH-on-
 
 Packages used
 ----
-In R (Rstudio Version 1.1.456) : 
+In R (Rstudio 1.1.456) : 
 - tidyverse
 - stringr
 
