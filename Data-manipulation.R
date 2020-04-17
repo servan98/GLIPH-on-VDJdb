@@ -211,7 +211,7 @@ for(e in dabsubid$Epitope){ #for loop over every Epitope
 #getting the individual cluster can be achieved by changing the variable nr in the line below, the " ".convergence.groups and the name of the file in line 220
 nr <- 2534 #change this number to the cluster you want the information of
 afdr <- NULL #empty afdr
-clus <- DATAz.convergence.groups #import the clusters
+clus <- read.delim("D:/gliph-1.0/gliph/bin/DATAz-convergence-groups.txt", header=FALSE) #import the clusters
 sclus <- strsplit(as.character(clus[nr,3])," ")#split up the target sequences in individual sequences
 for (s in sclus){
   afdr <- c(afdr, s) #add every sequence to afdr
